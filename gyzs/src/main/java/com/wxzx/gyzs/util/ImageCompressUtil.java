@@ -15,6 +15,7 @@ import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class ImageCompressUtil {
+    //TODO zsm 添加流的方法
     /**
      * 直接指定压缩后的宽高：
      * (先保存原文件，再压缩、上传)
