@@ -27,7 +27,7 @@ public class ImageCompressUtil {
      * @param smallIcon 文件名的小小后缀(注意，非文件后缀名称),入压缩文件名是yasuo.jpg,则压缩后文件名是yasuo(+smallIcon).jpg
      * @return 返回压缩后的文件的全路径
      */
-    public static String zipImageFile(String oldFile, int width, int height,
+    public String zipImageFile(String oldFile, int width, int height,
                                       float quality, String smallIcon) {
         if (oldFile == null) {
             return null;
@@ -64,7 +64,7 @@ public class ImageCompressUtil {
      * @param is
      * @return 文件全路径
      */
-    public static String writeFile(String fileName, InputStream is) {
+    public String writeFile(String fileName, InputStream is) {
         if (fileName == null || fileName.trim().length() == 0) {
             return null;
         }
@@ -99,10 +99,10 @@ public class ImageCompressUtil {
      * @createTime 2014-12-16
      * @lastModifyTime 2014-12-16
      */
-    public static void saveMinPhoto(String srcURL, String deskURL, double comBase,
+    public void saveMinPhoto(String srcURL, String deskURL, double comBase,
                                     double scale) throws Exception {
         File srcFile = new java.io.File(srcURL);
-        Image src = ImageIO.read(srcFile);
+        Image src = getImageByInputStream(srcFile);
         int srcHeight = src.getHeight(null);
         int srcWidth = src.getWidth(null);
         int deskHeight = 0;// 缩略图高
@@ -139,11 +139,23 @@ public class ImageCompressUtil {
         deskImage.close();
     }
 
+	private Image getImageByInputStream(Object obj) throws Exception {
+		if(obj instanceof InputStream){
+			InputStream inputStream = (InputStream) obj;
+			return ImageIO.read(inputStream);
+		}else if(obj instanceof File){
+			File file = (File) obj;
+			return ImageIO.read(file);
+		}
+
+		throw new Exception("给定数据源无法转换成图片！");
+	}
+
     public static void main(String args[]) throws Exception {
-//		ImageCompressUtil.zipImageFile("C:\\Users\\zhaosiming\\Desktop\\TimLine图片20181019141651.jpg", 1280, 1280, 0.5f, "x2");
-//		ImageCompressUtil.saveMinPhoto("C:\\Users\\zhaosiming\\Desktop\\timg.jpg", "C:\\Users\\zhaosiming\\Desktop\\TTTTTtimg.jpg", 800, 1);//详细图压缩比例
+//		new ImageCompressUtil().zipImageFile("C:\\Users\\zhaosiming\\Desktop\\TimLine图片20181019141651.jpg", 1280, 1280, 0.5f, "x2");
+//		new ImageCompressUtil().saveMinPhoto("C:\\Users\\zhaosiming\\Desktop\\timg.jpg", "C:\\Users\\zhaosiming\\Desktop\\TTTTTtimg.jpg", 800, 1);//详细图压缩比例
         //明细图和缩略图的路径可以抽出来，压缩基数也可以分别抽取出来
-        ImageCompressUtil.saveMinPhoto("C:\\Users\\zhaosiming\\Desktop\\20180917165346.gif", "C:\\Users\\zhaosiming\\Desktop\\TTTTT20180917165346.gif", 800, 1);//详细图压缩比例
-//		ImageCompressUtil.saveMinPhoto("C:\\Users\\zhaosiming\\Desktop\\timg.jpg", "C:\\Users\\zhaosiming\\Desktop\\TTTTTTTTTTtimg.jpg", 139, 1);//缩略图压缩比例
+        new ImageCompressUtil().saveMinPhoto("C:\\Users\\zhaosiming\\Desktop\\TimLine图片20181019141651.jpg", "C:\\Users\\zhaosiming\\Desktop\\TTTTTTimLine图片20181019141651.jpg", 800, 1);//详细图压缩比例
+//		new ImageCompressUtil().saveMinPhoto("C:\\Users\\zhaosiming\\Desktop\\timg.jpg", "C:\\Users\\zhaosiming\\Desktop\\TTTTTTTTTTtimg.jpg", 139, 1);//缩略图压缩比例
     }
 }
