@@ -26,7 +26,10 @@
 				<datasource.url><![CDATA[jdbc:mysql://localhost:3306/gyzs?useUnicode=true&characterEncoding=utf8]]></datasource.url>
 				<datasource.username>root</datasource.username>
 				<datasource.password>123456</datasource.password>
-				<logger.level>DEBUG</logger.level>
+				<logging.file>D:\\logInfo\\gyzs.log</logging.file>
+				<logger.level>INFO</logger.level>
+				<wx.appId>wx1b41f9394ac2f5cf</wx.appId>
+				<wx.appSecret>ad4748f37f3dc211ee7fdbd78b85d652</wx.appSecret>
 			</properties>
 		</profile>
 		<profile>
@@ -36,7 +39,10 @@
 				<datasource.url><![CDATA[jdbc:mysql://localhost:3306/gyzs?useUnicode=true&characterEncoding=utf8]]></datasource.url>
 				<datasource.username>root</datasource.username>
 				<datasource.password>123456</datasource.password>
-				<logger.level>DEBUG</logger.level>
+				<logging.file>D:\\logInfo\\gyzs.log</logging.file>
+				<logger.level>INFO</logger.level>
+				<wx.appId>wx1b41f9394ac2f5cf</wx.appId>
+				<wx.appSecret>ad4748f37f3dc211ee7fdbd78b85d652</wx.appSecret>
 			</properties>
 		</profile>
 		<profile>
@@ -46,12 +52,16 @@
 				<datasource.url></datasource.url>
 				<datasource.username></datasource.username>
 				<datasource.password></datasource.password>
+				<logging.file></logging.file>
 				<logger.level>INFO</logger.level>
+				<wx.appId></wx.appId>
+				<wx.appSecret></wx.appSecret>
 			</properties>
 		</profile>
 	</profiles>
 
 	<properties>
+		<encoding>UTF-8</encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -83,6 +93,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.session</groupId>
@@ -124,10 +139,24 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${encoding}</encoding>
+					<useDefaultDelimiters>true</useDefaultDelimiters>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

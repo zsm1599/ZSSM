@@ -1,5 +1,6 @@
 package com.wxzx.gyzs.service;
 
+import com.wxzx.gyzs.properties.SystemProperties;
 import com.wxzx.gyzs.util.GsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -10,9 +11,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,10 +45,14 @@ import java.util.Map;
  * -------------------------------------------------------------
  */
 @Component
+@EnableScheduling
 public class TokenTimer {
 	private static Log logger = LogFactory.getLog(TokenTimer.class);
 
 	private static String accessToken="";
+
+	@Resource
+	private SystemProperties systemProperties;
 
 	//@Scheduled(fixedDelay = 5000) 以一个固定延迟时间5秒钟调用一次执行  这个周期是以上一个调用任务的##完成时间##为基准，在上一个任务完成之后，5s后再次执行
 	//@Scheduled(fixedRate  = 5000) 以一个固定延迟时间5秒钟调用一次执行  这个周期是以上一个任务##开始时间##为基准，从上一任务开始执行后5s再次调用
@@ -54,8 +61,8 @@ public class TokenTimer {
 	public void setAccessTokenBySchedule() {
 		logger.info("==============开始获取access_token===============");
 		String grant_type = "client_credential";
-		String AppId= "微信APPID";//TODO
-		String secret= "微信密钥";//TODO
+		String AppId= systemProperties.getAppId();
+		String secret= systemProperties.getAppSecret();
 		String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type="+grant_type+"&appid="+AppId+"&secret="+secret;
 
 		CloseableHttpClient httpclient = HttpClients.createDefault();

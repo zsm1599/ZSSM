@@ -1,11 +1,15 @@
 package com.wxzx.gyzs.wxController;
 
+import com.wxzx.gyzs.properties.SystemProperties;
+import com.wxzx.gyzs.properties.TestProperties;
+import com.wxzx.gyzs.service.TokenTimer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -33,10 +37,16 @@ import javax.servlet.http.HttpServletRequest;
  * -------------------------------------------------------------
  */
 @Controller
-@RequestMapping("index")
-public class IndexController {
+@RequestMapping("test")
+public class TestController {
+	private Log logger = LogFactory.getLog(TestController.class);
 
-	private Log logger = LogFactory.getLog(IndexController.class);
+	@Resource
+	private SystemProperties systemProperties;
+	@Resource
+	private TestProperties testProperties;
+	@Resource
+	private TokenTimer tokenTimer;
 
 	@RequestMapping("welcome")
 	public String welcome(HttpServletRequest request) throws Exception{
@@ -50,10 +60,32 @@ public class IndexController {
 		return "gyzs/index/welcome";
 	}
 
-	@RequestMapping("welcomeWord")
+	@RequestMapping("properties")
 	@ResponseBody
-	public String welcomeWord(HttpServletRequest request) throws Exception{
-		logger.info("welcomeWord");
-		return "hello world";
+	public String properties(HttpServletRequest request) throws Exception{
+		logger.info("properties");
+		return "appId:" + systemProperties.getAppId() + ",appSecret:" + systemProperties.getAppSecret();
+	}
+
+	@RequestMapping("properties2")
+	@ResponseBody
+	public String properties2(HttpServletRequest request) throws Exception{
+		logger.info("properties2");
+		return "appId2:" + testProperties.getAppId() + ",appSecret2:" + testProperties.getAppSecret();
+	}
+
+	@RequestMapping("getToken")
+	@ResponseBody
+	public String getToken(HttpServletRequest request) throws Exception{
+		logger.info("accessToken");
+		return "accessToken:" + tokenTimer.getAccessToken();
+	}
+
+	@RequestMapping("getToken2")
+	@ResponseBody
+	public String getToken2(HttpServletRequest request) throws Exception{
+		logger.info("accessToken2");
+		tokenTimer.setAccessTokenBySchedule();
+		return "accessToken:" + tokenTimer.getAccessToken();
 	}
 }
