@@ -2,6 +2,7 @@ package com.wxzx.gyzs.wxController;
 
 import com.wxzx.gyzs.properties.SystemProperties;
 import com.wxzx.gyzs.properties.TestProperties;
+import com.wxzx.gyzs.service.TestService;
 import com.wxzx.gyzs.service.TokenTimer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,6 +48,8 @@ public class TestController {
 	private TestProperties testProperties;
 	@Resource
 	private TokenTimer tokenTimer;
+	@Resource
+	private TestService testService;
 
 	@RequestMapping("welcome")
 	public String welcome(HttpServletRequest request) throws Exception{
@@ -87,5 +90,12 @@ public class TestController {
 		logger.info("accessToken2");
 		tokenTimer.setAccessTokenBySchedule();
 		return "accessToken:" + tokenTimer.getAccessToken();
+	}
+
+	@RequestMapping("sayHello")
+	@ResponseBody
+	public String sayHello(HttpServletRequest request) throws Exception{
+		logger.info("sayHello");
+		return testService.sayHello();
 	}
 }
