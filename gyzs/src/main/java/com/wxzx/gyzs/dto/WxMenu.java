@@ -27,13 +27,13 @@ package com.wxzx.gyzs.dto;
 
 public class WxMenu {
 
-	private WxButton[] wxButtons;
+	private WxButton[] button;
 
-	public WxButton[] getWxButtons() {
-		return wxButtons;
+	public WxButton[] getButton() {
+		return button;
 	}
 
-	public void setWxButtons(WxButton[] wxButtons) {
-		this.wxButtons = wxButtons;
+	public void setButton(WxButton[] button) {
+		this.button = button;
 	}
 }
