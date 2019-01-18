@@ -54,7 +54,7 @@
 				<datasource.password></datasource.password>
 				<logging.file></logging.file>
 				<logger.level>INFO</logger.level>
-				<wx.appId></wx.appId>
+				<wx.appId>wxb0146959708e6c46</wx.appId>
 				<wx.appSecret></wx.appSecret>
 			</properties>
 		</profile>
