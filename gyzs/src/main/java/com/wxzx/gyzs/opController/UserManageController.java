@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * ---------------------------------------------------------------
- *
- * @copyright Copyright 2014-2016  JR.JD.COM  All Rights Reserved
- * -----------------------------------------------------------------
+ * <p/>
  * 项目名称:  gyzs
  * <p/>
- * 类名称:    com.wxzx.gyzs.opController.HouseManageController
+ * 类名称:    com.wxzx.gyzs.opController.UserManageController
  * 功    能:
  * -----------------------------------------------------------------
  * 创建人：   zhaosiming
  * <p/>
- * 创建时间： 2018/10/31 9:56
+ * 创建时间： 2019/1/26 18:09
  * 版本号：   1.0
  * <p/>
  * 修改人：   zhaosiming
- * 修改时间： 2018/10/31 9:56
+ * 修改时间： 2019/1/26 18:09
  * 版本号：   1.0
  * 修改原因：
  * <p/>
@@ -32,13 +30,13 @@ import javax.servlet.http.HttpServletRequest;
  * -------------------------------------------------------------
  */
 @Controller
-@RequestMapping("/op/house")
-public class HouseManageController {
-	private Log logger = LogFactory.getLog(HouseManageController.class);
+@RequestMapping("/op/userManage")
+public class UserManageController {
+	private Log logger = LogFactory.getLog(UserManageController.class);
 
-	@RequestMapping("welcome2")
-	public String welcome2(HttpServletRequest request) throws Exception{
-		logger.info("welcome2");
-		return "gyzs/index/welcome";
+	@RequestMapping("index")
+	public String index(HttpServletRequest request) throws Exception{
+		logger.info("index");
+		return "gyzs/op/userManage/index";
 	}
 }
