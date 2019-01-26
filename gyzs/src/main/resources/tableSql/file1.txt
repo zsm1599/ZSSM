@@ -1,0 +1,106 @@
+CREATE TABLE `house_base_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `house_type` varchar(64) DEFAULT NULL COMMENT '房屋类型，如几室几厅，loft',
+  `house_area` varchar(64) DEFAULT NULL COMMENT '房屋大小，单位:平方米',
+  `house_address` varchar(255) DEFAULT NULL COMMENT '房屋位置',
+  `house_memo` varchar(255) DEFAULT NULL COMMENT '房屋其他信息',
+  `other_info_id` bigint(20) DEFAULT NULL AUTO_INCREMENT COMMENT '房屋其他信息ID',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_operator` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `update_operator` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `yn` tinyint(4) DEFAULT '1' COMMENT '数据状态 数据状态:0:无效；1:有效',
+  `version` int(11) DEFAULT NULL COMMENT '版本号',
+  `extend_params` varchar(1024) DEFAULT NULL COMMENT '扩展字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='房屋基本信息表';
+
+
+CREATE TABLE `house_other_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `house_thumbnail_pre` varchar(255) DEFAULT NULL COMMENT '房屋缩略图地址前缀',
+  `house_thumbnail` varchar(512) DEFAULT NULL COMMENT '房屋缩略图名称集合',
+  `house_actual_pre` varchar(255) DEFAULT NULL COMMENT '房屋实际图地址前缀',
+  `house_actual` varchar(512) DEFAULT NULL COMMENT '房屋实际图名称集合',
+  `decorate_style` varchar(512) DEFAULT NULL COMMENT '装修风格,如欧式，日式，现代等',
+  `decorate_level` varchar(512) DEFAULT NULL COMMENT '装修级别,如简单、中等、豪华',
+  `decorate_cost` varchar(512) DEFAULT NULL COMMENT '费用',
+  `base_info_id` bigint(20) DEFAULT NULL AUTO_INCREMENT COMMENT '房屋基本信息ID',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_operator` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `update_operator` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `yn` tinyint(4) DEFAULT '1' COMMENT '数据状态 数据状态:0:无效；1:有效',
+  `version` int(11) DEFAULT NULL COMMENT '版本号',
+  `extend_params` varchar(1024) DEFAULT NULL COMMENT '扩展字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='房屋其他信息表';
+
+
+CREATE TABLE `house_relation` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `base_info_id` bigint(20) DEFAULT NULL AUTO_INCREMENT COMMENT '房屋基本信息ID',
+  `other_info_id` bigint(20) DEFAULT NULL AUTO_INCREMENT COMMENT '房屋其他信息ID',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_operator` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `update_operator` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `yn` tinyint(4) DEFAULT '1' COMMENT '数据状态 数据状态:0:无效；1:有效',
+  `version` int(11) DEFAULT NULL COMMENT '版本号',
+  `extend_params` varchar(1024) DEFAULT NULL COMMENT '扩展字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='房屋信息关联表';
+
+
+CREATE TABLE `article_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `article_type` varchar(64) DEFAULT NULL COMMENT '文章类型，如选材，家具',
+  `article_title` varchar(128) DEFAULT NULL COMMENT '文章标题',
+  `article_url` varchar(256) DEFAULT NULL COMMENT '文章链接',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_operator` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `update_operator` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `yn` tinyint(4) DEFAULT '1' COMMENT '数据状态 数据状态:0:无效；1:有效',
+  `version` int(11) DEFAULT NULL COMMENT '版本号',
+  `extend_params` varchar(1024) DEFAULT NULL COMMENT '扩展字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='文章信息表';
+
+
+CREATE TABLE `recommend_article` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `article_title` varchar(128) DEFAULT NULL COMMENT '文章标题',
+  `article_url` varchar(256) DEFAULT NULL COMMENT '文章链接',
+  `recommend_tag` varchar(64) DEFAULT NULL COMMENT '推荐标签',
+  `used` tinyint(4) DEFAULT '0' COMMENT '是否启用 启用状态:0:不启用；1:启用',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_operator` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `update_operator` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `yn` tinyint(4) DEFAULT '1' COMMENT '数据状态 数据状态:0:无效；1:有效',
+  `version` int(11) DEFAULT NULL COMMENT '版本号',
+  `extend_params` varchar(1024) DEFAULT NULL COMMENT '扩展字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='推荐文章信息表';
+
+
+CREATE TABLE `administrator_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_name` varchar(64) DEFAULT NULL COMMENT '登录账号',
+  `user_password` varchar(64) DEFAULT NULL COMMENT '登录密码',
+  `user_mobile` varchar(64) DEFAULT NULL COMMENT '联系电话',
+  `user_authority` varchar(64) DEFAULT NULL COMMENT '权限,用于后续功能扩展',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modified_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_operator` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `update_operator` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `yn` tinyint(4) DEFAULT '1' COMMENT '数据状态 数据状态:0:无效；1:有效',
+  `version` int(11) DEFAULT NULL COMMENT '版本号',
+  `extend_params` varchar(1024) DEFAULT NULL COMMENT '扩展字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='管理员信息表';
+
+
+
+

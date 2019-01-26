@@ -31,13 +31,19 @@ public class BaseDomain {
 
 	private Long id;
 
-	private Date createTime;
+	private Date createdTime;
 
-	private Date updateTime;
+	private Date modifiedTime;
 
-	private Boolean delFlag;
+	private String createOperator;
 
-	private String remark;
+	private String updateOperator;
+
+	private Boolean yn;
+
+	private Integer version;
+
+	private String extendParams;
 
 	public Long getId() {
 		return id;
@@ -47,35 +53,59 @@ public class BaseDomain {
 		this.id = id;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public Date getCreatedTime() {
+		return createdTime;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
 	}
 
-	public Date getUpdateTime() {
-		return updateTime;
+	public Date getModifiedTime() {
+		return modifiedTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+	public void setModifiedTime(Date modifiedTime) {
+		this.modifiedTime = modifiedTime;
 	}
 
-	public Boolean getDelFlag() {
-		return delFlag;
+	public String getCreateOperator() {
+		return createOperator;
 	}
 
-	public void setDelFlag(Boolean delFlag) {
-		this.delFlag = delFlag;
+	public void setCreateOperator(String createOperator) {
+		this.createOperator = createOperator;
 	}
 
-	public String getRemark() {
-		return remark;
+	public String getUpdateOperator() {
+		return updateOperator;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setUpdateOperator(String updateOperator) {
+		this.updateOperator = updateOperator;
+	}
+
+	public Boolean getYn() {
+		return yn;
+	}
+
+	public void setYn(Boolean yn) {
+		this.yn = yn;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	public String getExtendParams() {
+		return extendParams;
+	}
+
+	public void setExtendParams(String extendParams) {
+		this.extendParams = extendParams;
 	}
 }
