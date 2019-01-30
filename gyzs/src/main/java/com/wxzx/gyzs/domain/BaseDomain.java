@@ -43,6 +43,8 @@ public class BaseDomain {
 
 	private Integer version;
 
+	private String remark;
+
 	private String extendParams;
 
 	public Long getId() {
@@ -99,6 +101,14 @@ public class BaseDomain {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getExtendParams() {

@@ -1,5 +1,7 @@
 package com.wxzx.gyzs.domain;
 
+import com.wxzx.gyzs.enums.EmHouseType;
+
 /**
  * ---------------------------------------------------------------
  * <p/>
@@ -25,7 +27,7 @@ package com.wxzx.gyzs.domain;
 
 public class HouseBaseInfo extends BaseDomain{
 
-	private String houseType;
+	private EmHouseType houseType;
 
 	private String houseArea;
 
@@ -35,11 +37,11 @@ public class HouseBaseInfo extends BaseDomain{
 
 	private Long otherInfoId;
 
-	public String getHouseType() {
+	public EmHouseType getHouseType() {
 		return houseType;
 	}
 
-	public void setHouseType(String houseType) {
+	public void setHouseType(EmHouseType houseType) {
 		this.houseType = houseType;
 	}
 

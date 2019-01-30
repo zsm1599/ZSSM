@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wxzx.gyzs.dao.HouseBaseInfoDao">
+    <resultMap id="BaseResultMap" type="com.wxzx.gyzs.domain.HouseBaseInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <!-- result column="house_type" jdbcType="VARCHAR" property="houseType" typeHandler="org.apache.ibatis.type.EnumTypeHandler" -->
+        <result column="house_type" property="houseType" jdbcType="VARCHAR" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result column="house_area" property="houseArea" jdbcType="VARCHAR"/>
+        <result column="house_address" property="houseAddress" jdbcType="VARCHAR"/>
+        <result column="house_memo" property="houseMemo" jdbcType="VARCHAR"/>
+        <result column="other_info_id" property="otherInfoId" jdbcType="BIGINT"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+        <result column="create_operator" property="createOperator" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="yn" jdbcType="TINYINT" property="yn" typeHandler="com.wxzx.gyzs.handler.BooleanTinyIntTypeTypeHandler" />
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="extend_params" property="extendParams" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, house_type, house_area, house_address, house_memo, other_info_id, created_time,
+        modified_time, create_operator, update_operator, yn, version, remark, extend_params
+    </sql>
+
+    <insert id="insert" parameterType="com.wxzx.gyzs.domain.HouseBaseInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO house_base_info (
+        house_type, house_area,
+        house_address, house_memo,
+        other_info_id, created_time
+        modified_time, create_operator,
+        update_operator, yn,
+        version, remark, extend_params)
+        VALUES (
+        #{houseType,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+        #{houseArea,jdbcType=VARCHAR}, #{houseAddress,jdbcType=VARCHAR},
+        #{houseMemo,jdbcType=VARCHAR}, #{otherInfoId,jdbcType=BIGINT},
+        now(), now(),
+        #{createOperator,jdbcType=VARCHAR}, #{updateOperator,jdbcType=VARCHAR},
+        #{yn,jdbcType=TINYINT,typeHandler=com.wxzx.gyzs.handler.BooleanTinyIntTypeTypeHandler}, 1,
+        #{remark,jdbcType=VARCHAR},#{extendParams,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>
